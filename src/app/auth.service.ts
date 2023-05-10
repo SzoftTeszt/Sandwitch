@@ -19,10 +19,12 @@ export class AuthService {
           if (user) {
             this.loggedUser=true;
             this.userData=user;
+            console.log(this.userData);
           }
           else {
             this.loggedUser=false;
             this.userData=null;
+            console.log(this.userData);
           }
           this.isLogged.next(this.loggedUser);
         }
@@ -49,6 +51,9 @@ export class AuthService {
     return this.afAuth.signOut();
   }
 
+  signIn(email:string, password:string){
+    return this.afAuth.signInWithEmailAndPassword(email, password);
+  }
   forgotPassword(email:string){
     return this.afAuth.sendPasswordResetEmail(email);
   }

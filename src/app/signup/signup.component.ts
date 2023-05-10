@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -10,7 +11,7 @@ export class SignupComponent {
   email="";
   password="";
 
-  constructor(private auth:AuthService){}
+  constructor(private auth:AuthService, private router:Router){}
 
   signUp(email:string, password:string){
     this.auth.signUp(email, password)
@@ -23,7 +24,9 @@ export class SignupComponent {
 
   googleAuth(){
     this.auth.googleAuth()
-    .then(()=>console.log("Sikeres google regiszráció"))
+    .then(()=>{console.log("Sikeres google regiszráció");
+          this.router.navigate(['/sandwich']);   
+  })
     .catch((err)=>console.log("Google regisztrációs hiba",err.message))
 
   }
