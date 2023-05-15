@@ -3,6 +3,7 @@ import { AngularFireAuth} from '@angular/fire/compat/auth';
 import { GoogleAuthProvider} from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -12,19 +13,26 @@ export class AuthService {
   loggedUser=false;
   userData:any;
 
-  constructor(private afAuth:AngularFireAuth, private router:Router)
+  constructor(private afAuth:AngularFireAuth, private router:Router,
+    private http: HttpClient)
    {
       this.afAuth.authState.subscribe(
         (user)=>{
           if (user) {
             this.loggedUser=true;
             this.userData=user;
-            console.log(this.userData);
+
+            this.userData.getIdToken().then((token:any) => {
+              this.userData.token=token;
+            }).catch((err:any) => {
+              console.log("Hiba a token lekérésénél",err);
+            });
+            //console.log(this.userData);
           }
           else {
             this.loggedUser=false;
             this.userData=null;
-            console.log(this.userData);
+            //console.log(this.userData);
           }
           this.isLogged.next(this.loggedUser);
         }
@@ -57,4 +65,35 @@ export class AuthService {
   forgotPassword(email:string){
     return this.afAuth.sendPasswordResetEmail(email);
   }
+
+  setCustomClaims(uid:any, claims:any){
+    const url="http://localhost:3000/setCustomClaims";    
+    // const uid= this.userData.uid;
+    // const claims = {admin:true};
+
+    const body={uid, claims};
+    console.log("uid:",uid);
+    console.log("Claims", claims);
+    const headers =
+    new HttpHeaders().set('Authorization',this.userData.token);
+    this.http.post(url, body, {headers}).subscribe({
+      next:()=>{console.log("A claims beállítása sikeres!")},
+      error:(err)=>{console.log("Hiba a claims beállításakor: ", err)}
+    })
+  }
+
+  getUsers(){
+    const url="http://localhost:3000/users"; 
+    const headers = 
+    new HttpHeaders().set('Authorization',this.userData.token);
+    return this.http.get(url, {headers})
+  }
+
+  getClaims(uid:string){
+    const url=`http://localhost:3000/users/${uid}/claims`; 
+    const headers = 
+    new HttpHeaders().set('Authorization',this.userData.token);
+    return this.http.get(url, {headers})
+  }
+
 }

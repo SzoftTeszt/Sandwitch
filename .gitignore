@@ -5,12 +5,13 @@
 /tmp
 /out-tsc
 /bazel-out
-
+/server/*.json
 # Node
 /node_modules
 npm-debug.log
 yarn-error.log
-
+/server/*.json
+/app/enviroments.ts
 # IDEs and editors
 .idea/
 .project

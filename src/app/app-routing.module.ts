@@ -5,6 +5,7 @@ import { SigninComponent } from './signin/signin.component';
 import { SandwichListComponent } from './sandwich-list/sandwich-list.component';
 import { ForgotpaswordComponent } from './forgotpasword/forgotpasword.component';
 import { VerifyemailComponent } from './verifyemail/verifyemail.component';
+import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
   {path:"signup", component:SignupComponent},
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path:"sandwich", component:SandwichListComponent},
   {path:"forgotpassword", component:ForgotpaswordComponent},
   {path:"verifyemail", component:VerifyemailComponent},
+  {path:"user", component:UserComponent},
   {path:" ", component:SandwichListComponent},
   {path:"**", component:SandwichListComponent},
 ];
