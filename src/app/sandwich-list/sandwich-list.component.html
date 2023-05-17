@@ -1,1 +1,9 @@
-<button (click)="addSandwich()" class="btn btn-primary">Add Sandwich</button>
+<app-data-list
+[adatok]="adatok"
+[oszlopok]="oszlopok"
+[showError]="showError"
+[errorMessage]="errorMessage"
+(create)="addBody($event)"
+(update)="updateBody($event)"
+(delete)="deleteBody($event)"
+></app-data-list>

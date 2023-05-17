@@ -7,11 +7,15 @@
 /bazel-out
 /server/*.json
 # Node
+node_modules
 /node_modules
 npm-debug.log
 yarn-error.log
 /server/*.json
+/src/app/enviroments.ts
 /app/enviroments.ts
+/server/*.json
+/src/server/*.json
 # IDEs and editors
 .idea/
 .project

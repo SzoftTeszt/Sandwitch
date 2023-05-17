@@ -6,16 +6,22 @@ import { Sandwitch } from './sandwich';
   providedIn: 'root'
 })
 export class BaseService {
-  ref:AngularFireList<Sandwitch>
+  refSandwich:AngularFireList<Sandwitch>
+  refDrink:AngularFireList<Sandwitch>
   constructor(private db: AngularFireDatabase) {
-    this.ref=db.list('/sandwich');
+    this.refSandwich=db.list('/sandwich');
+    this.refDrink=db.list('/drink');
    }
 
-   getAll(){
-    return this.ref;
+   getAll(mit:string){
+    if (mit=="Sandwich") return this.refSandwich;
+    if (mit=="Drink") return this.refDrink;
+    return null;
    }
 
-   create(body:any){
-    return this.ref.push(body);
+   create(mit:string, body:any){
+    if (mit=="Sandwich")return this.refSandwich.push(body);
+    if (mit=="Drink")return this.refDrink.push(body);
+    return null;
    }
 }

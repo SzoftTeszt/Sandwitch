@@ -3,7 +3,7 @@ const admin = require('firebase-admin');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
-const serviceAccount = require('./sandwich-32718-firebase-adminsdk-weljq-2862e8cf12.json'); // Firebase Admin SDK szolgáltatási fiók kulcsa
+const serviceAccount = require('./sandwich-32718-firebase-adminsdk-weljq-81a73dcf1f.json'); // Firebase Admin SDK szolgáltatási fiók kulcsa
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://sandwich-32718-default-rtdb.firebaseio.com"

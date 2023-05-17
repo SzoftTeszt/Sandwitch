@@ -15,8 +15,10 @@ import { VerifyemailComponent } from './verifyemail/verifyemail.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SandwichListComponent } from './sandwich-list/sandwich-list.component';
 import { FormsModule } from '@angular/forms';
-import { enviroments } from './enviroments';
+import { enviroment } from './enviroments';
 import { UserComponent } from './user/user.component';
+import { DataListComponent } from './data-list/data-list.component';
+import { DataCellComponent } from './data-cell/data-cell.component';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { UserComponent } from './user/user.component';
     VerifyemailComponent,
     NavbarComponent,
     SandwichListComponent,
-    UserComponent
+    UserComponent,
+    DataListComponent,
+    DataCellComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +41,7 @@ import { UserComponent } from './user/user.component';
     FormsModule,
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    AngularFireModule.initializeApp(enviroments.firebaseConfig),
+    AngularFireModule.initializeApp(enviroment.firebaseConfig),
     HttpClientModule
   ],
   providers: [],
